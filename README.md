@@ -59,7 +59,7 @@ curl -L https://github.com/ImpossibleForge/pfc-jsonl/releases/latest/download/pf
 
 **macOS:** Coming soon.
 
-**Windows:** Coming soon — contact **impossibleforge@gmail.com** for early access.
+**Windows:** No native binary available. Use WSL2 or a Linux machine.
 
 **Custom location:** Set the `PFC_BINARY` environment variable:
 ```bash
@@ -157,7 +157,7 @@ print(pfc.get_binary())  # /usr/local/bin/pfc_jsonl
 
 ## Community Mode
 
-Without a license key, PFC-JSONL runs in **Community Mode**:
+PFC-JSONL includes a built-in free tier called **Community Mode** — no account, no signup, no license key required:
 
 - All operations (compress, decompress, query, seek-blocks) are **free up to 5 GB/day**
 - `compress` counts **input bytes**; `decompress`, `query`, `seek-blocks` count **decompressed output bytes**
