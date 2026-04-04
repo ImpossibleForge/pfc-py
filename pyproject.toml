@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pfc-jsonl"
+version = "0.1.0"
+description = "Python interface for PFC-JSONL — high-performance log compression with block-level timestamp filtering"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "ImpossibleForge", email = "impossibleforge@gmail.com" }
+]
+keywords = [
+    "compression", "jsonl", "logs", "log-compression",
+    "structured-logs", "fluent-bit", "duckdb"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: System :: Logging",
+    "Topic :: System :: Archiving :: Compression",
+]
+requires-python = ">=3.9"
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/ImpossibleForge/pfc-jsonl"
+Repository = "https://github.com/ImpossibleForge/pfc-jsonl"
+"Bug Tracker" = "https://github.com/ImpossibleForge/pfc-jsonl/issues"
+Changelog = "https://github.com/ImpossibleForge/pfc-jsonl/releases"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pfc"]
