@@ -59,7 +59,7 @@ curl -L https://github.com/ImpossibleForge/pfc-jsonl/releases/latest/download/pf
 
 **macOS:** Coming soon.
 
-**Windows:** Download `pfc_jsonl-windows-x64.exe` from the [releases page](https://github.com/ImpossibleForge/pfc-jsonl/releases), rename to `pfc_jsonl.exe`, add to PATH.
+**Windows:** Coming soon — contact **impossibleforge@gmail.com** for early access.
 
 **Custom location:** Set the `PFC_BINARY` environment variable:
 ```bash
@@ -75,7 +75,7 @@ pfc_jsonl --help
 
 ## API Reference
 
-### `pfc.compress(input_path, output_path, *, level="balanced", block_size_mb=None, workers=None, verbose=False)`
+### `pfc.compress(input_path, output_path, *, level="default", block_size_mb=None, workers=None, verbose=False)`
 
 Compress a JSONL file to PFC format.
 
@@ -160,8 +160,9 @@ print(pfc.get_binary())  # /usr/local/bin/pfc_jsonl
 Without a license key, PFC-JSONL runs in **Community Mode**:
 
 - All operations (compress, decompress, query, seek-blocks) are **free up to 5 GB/day**
+- `compress` counts **input bytes**; `decompress`, `query`, `seek-blocks` count **decompressed output bytes**
 - Usage is tracked locally in `~/.pfc/usage.json` — **no network calls**
-- Resets every calendar day
+- Resets every calendar day (midnight UTC)
 
 For production use exceeding 5 GB/day, contact: **impossibleforge@gmail.com**
 
@@ -191,10 +192,16 @@ Use [pfc-fluentbit](https://github.com/ImpossibleForge/pfc-fluentbit) to receive
 
 Use the [pfc DuckDB extension](https://github.com/ImpossibleForge/pfc-duckdb) to query `.pfc` files directly with SQL:
 
+> **Status:** Submitted — pending review ([PR #1679](https://github.com/duckdb/community-extensions/pull/1679)). Once available:
+
 ```sql
+-- Once available in DuckDB community extensions:
 INSTALL pfc FROM community;
 LOAD pfc;
-SELECT * FROM read_pfc_jsonl('logs/app.pfc') WHERE level = 'ERROR';
+LOAD json;
+SELECT line->>'$.level' AS level, line->>'$.message' AS msg
+FROM read_pfc_jsonl('logs/app.pfc')
+WHERE line->>'$.level' = 'ERROR';
 ```
 
 ---
