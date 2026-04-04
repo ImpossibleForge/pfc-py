@@ -86,7 +86,7 @@ pfc.compress("big.jsonl", "big.pfc", level="max", workers=4)
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
-| `level` | `"balanced"` | `"fast"`, `"balanced"`, or `"max"` |
+| `level` | `"default"` | `"fast"`, `"default"`, or `"max"` (also accepts `1`-`5`) |
 | `block_size_mb` | auto | Block size in MiB (power of 2, e.g. 16, 32) |
 | `workers` | auto | Parallel compression workers |
 | `verbose` | `False` | Print progress from binary |
@@ -103,7 +103,7 @@ pfc.decompress("logs/app.pfc", "logs/app_restored.jsonl")
 
 ---
 
-### `pfc.query(pfc_path, from_ts, to_ts, output_path="-", *, verbose=False)`
+### `pfc.query(pfc_path, from_ts, to_ts, output_path="-")`
 
 Decompress only the blocks matching a timestamp range.
 

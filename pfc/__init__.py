@@ -26,7 +26,7 @@ from typing import Optional
 
 from ._core import PFCError, _find_binary, run
 
-__version__ = "0.1.0"
+__version__ = "0.1.2"
 __all__ = [
     "compress",
     "decompress",
@@ -56,7 +56,7 @@ def compress(
     input_path: str,
     output_path: str,
     *,
-    level: str = "balanced",
+    level: str = "default",
     block_size_mb: Optional[int] = None,
     workers: Optional[int] = None,
     verbose: bool = False,
@@ -68,9 +68,10 @@ def compress(
     Args:
         input_path:    Path to the input .jsonl file (or "-" for stdin).
         output_path:   Path to write the compressed .pfc file.
-        level:         Compression level: "fast", "balanced" (default), or "max".
+        level:         Compression level: "fast", "default" (default), or "max".
+                       Also accepts numeric levels 1-5.
         block_size_mb: Block size in MiB (must be a power of 2, e.g. 16, 32).
-                       Defaults to the binary's built-in default.
+                       Defaults to the binary's built-in default (32 MiB).
         workers:       Number of parallel compression workers.
                        Defaults to the binary's auto-detection.
         verbose:       Print progress info from the binary.
@@ -85,7 +86,7 @@ def compress(
     """
     args = ["compress", input_path, output_path, "--level", level]
     if block_size_mb is not None:
-        args += ["--block-size", str(block_size_mb)]
+        args += ["--block-mib", str(block_size_mb)]
     if workers is not None:
         args += ["--workers", str(workers)]
     if not verbose:
@@ -127,8 +128,6 @@ def query(
     from_ts: str,
     to_ts: str,
     output_path: str = "-",
-    *,
-    verbose: bool = False,
 ) -> None:
     """Decompress only the blocks matching a timestamp range.
 
@@ -143,7 +142,6 @@ def query(
                      Example: "2026-01-01T00:00:00" or "1735689600"
         to_ts:       End of the time range (inclusive).
         output_path: Path to write the results. Use "-" for stdout (default).
-        verbose:     Print block selection info from the binary.
 
     Raises:
         FileNotFoundError: if pfc_jsonl binary is not found.
@@ -154,8 +152,6 @@ def query(
         ...           "logs/morning.jsonl")
     """
     args = ["query", pfc_path, "--from", from_ts, "--to", to_ts, "--out", output_path]
-    if not verbose:
-        args += ["--quiet"]
     run(args)
 
 
