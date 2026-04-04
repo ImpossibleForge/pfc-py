@@ -12,7 +12,7 @@ pip install pfc-jsonl
 
 ## What is PFC-JSONL?
 
-PFC-JSONL compresses JSONL log files **26–34% smaller than gzip/zstd** on typical log data. It stores a timestamp index alongside each file, enabling fast time-range queries without full decompression.
+PFC-JSONL compresses JSONL log files **25–37% smaller than gzip/zstd** on typical log data. It stores a timestamp index alongside each file, enabling fast time-range queries without full decompression.
 
 | Operation | Description |
 |-----------|-------------|
