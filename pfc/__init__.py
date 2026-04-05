@@ -4,11 +4,7 @@ pfc — Python interface for PFC-JSONL compression.
 PFC-JSONL is a high-performance compressor for structured log files (JSONL).
 This package provides a thin Python wrapper around the pfc_jsonl binary.
 
-Community Mode (no license key):
-    All operations are free up to 5 GB per calendar day.
-    Usage is tracked locally in ~/.pfc/usage.json — no network calls.
-
-License keys for production use (>5 GB/day):
+Free for personal and open-source use. Commercial use requires a license:
     https://github.com/ImpossibleForge/pfc-jsonl
 
 Quick start:
@@ -20,19 +16,16 @@ Quick start:
 
 from __future__ import annotations
 
-import json
-from pathlib import Path
 from typing import Optional
 
 from ._core import PFCError, _find_binary, run
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 __all__ = [
     "compress",
     "decompress",
     "query",
     "seek_blocks",
-    "community_usage",
     "get_binary",
     "PFCError",
 ]
@@ -62,8 +55,6 @@ def compress(
     verbose: bool = False,
 ) -> None:
     """Compress a JSONL file to PFC format.
-
-    Community Mode: counts input bytes toward the 5 GB/day limit.
 
     Args:
         input_path:    Path to the input .jsonl file (or "-" for stdin).
@@ -102,8 +93,6 @@ def decompress(
 ) -> None:
     """Decompress a PFC file back to JSONL.
 
-    Community Mode: counts decompressed output bytes toward the 5 GB/day limit.
-
     Args:
         input_path:  Path to the .pfc file (or "-" for stdin).
         output_path: Path to write the restored .jsonl file.
@@ -133,8 +122,6 @@ def query(
 
     Block-level filtering: only blocks that overlap the given time range
     are decompressed. Much faster than full decompression for recent logs.
-
-    Community Mode: counts decompressed output bytes toward the 5 GB/day limit.
 
     Args:
         pfc_path:    Path to the .pfc file.
@@ -167,8 +154,6 @@ def seek_blocks(
     This is the low-level primitive used by the DuckDB extension internally.
     Useful for building custom query layers on top of PFC files.
 
-    Community Mode: counts decompressed output bytes toward the 5 GB/day limit.
-
     Args:
         pfc_path:    Path to the .pfc file.
         blocks:      List of 0-based block indices to decompress.
@@ -190,44 +175,3 @@ def seek_blocks(
     if not verbose:
         args += ["--quiet"]
     run(args)
-
-
-def community_usage() -> dict:
-    """Return today's Community Mode usage.
-
-    Reads ~/.pfc/usage.json without invoking the binary.
-
-    Returns:
-        dict with keys:
-            "date"            (str)  — today's date, e.g. "2026-04-04"
-            "bytes_today"     (int)  — bytes processed today
-            "bytes_remaining" (int)  — bytes remaining before the 5 GB limit
-            "limit_gb"        (float) — daily limit in GB (always 5.0)
-            "used_gb"         (float) — bytes_today converted to GB
-
-    Example:
-        >>> usage = pfc.community_usage()
-        >>> print(f"Used {usage['used_gb']:.2f} GB of {usage['limit_gb']} GB today")
-    """
-    import time
-
-    limit = 5 * 1024 ** 3
-    usage_path = Path.home() / ".pfc" / "usage.json"
-    today = time.strftime("%Y-%m-%d")
-
-    bytes_today = 0
-    try:
-        if usage_path.exists():
-            data = json.loads(usage_path.read_text(encoding="utf-8"))
-            if data.get("date") == today:
-                bytes_today = int(data.get("bytes_today", 0))
-    except Exception:
-        pass
-
-    return {
-        "date": today,
-        "bytes_today": bytes_today,
-        "bytes_remaining": max(0, limit - bytes_today),
-        "limit_gb": 5.0,
-        "used_gb": round(bytes_today / 1024 ** 3, 3),
-    }
