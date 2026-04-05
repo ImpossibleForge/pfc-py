@@ -39,10 +39,6 @@ pfc.query("logs/app.pfc",
           from_ts="2026-01-15T08:00:00",
           to_ts="2026-01-15T09:00:00",
           output_path="logs/morning.jsonl")
-
-# Check Community Mode usage
-usage = pfc.community_usage()
-print(f"Used {usage['used_gb']:.2f} GB of {usage['limit_gb']} GB today")
 ```
 
 ---
@@ -128,21 +124,6 @@ pfc.seek_blocks("logs/app.pfc", [0, 3, 7], "logs/selected.jsonl")
 
 ---
 
-### `pfc.community_usage() -> dict`
-
-Return today's Community Mode usage without invoking the binary.
-
-```python
-usage = pfc.community_usage()
-# {
-#   "date": "2026-04-04",
-#   "bytes_today": 1073741824,
-#   "bytes_remaining": 4294967296,
-#   "limit_gb": 5.0,
-#   "used_gb": 1.0
-# }
-```
-
 ---
 
 ### `pfc.get_binary() -> str`
@@ -154,17 +135,6 @@ print(pfc.get_binary())  # /usr/local/bin/pfc_jsonl
 ```
 
 ---
-
-## Community Mode
-
-PFC-JSONL includes a built-in free tier called **Community Mode** — no account, no signup, no license key required:
-
-- All operations (compress, decompress, query, seek-blocks) are **free up to 5 GB/day**
-- `compress` counts **input bytes**; `decompress`, `query`, `seek-blocks` count **decompressed output bytes**
-- Usage is tracked locally in `~/.pfc/usage.json` — **no network calls**
-- Resets every calendar day (midnight UTC)
-
-For production use exceeding 5 GB/day, contact: **impossibleforge@gmail.com**
 
 ---
 
@@ -210,4 +180,4 @@ WHERE line->>'$.level' = 'ERROR';
 
 MIT — see [LICENSE](LICENSE)
 
-Binary releases are proprietary. See [pfc-jsonl releases](https://github.com/ImpossibleForge/pfc-jsonl/releases) for terms.
+The **PFC-JSONL binary** is proprietary software — free for personal and open-source use. Commercial use requires a license: [impossibleforge@gmail.com](mailto:impossibleforge@gmail.com)
