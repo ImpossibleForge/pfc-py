@@ -162,10 +162,7 @@ Use [pfc-fluentbit](https://github.com/ImpossibleForge/pfc-fluentbit) to receive
 
 Use the [pfc DuckDB extension](https://github.com/ImpossibleForge/pfc-duckdb) to query `.pfc` files directly with SQL:
 
-> **Status:** Submitted — pending review ([PR #1679](https://github.com/duckdb/community-extensions/pull/1679)). Once available:
-
 ```sql
--- Once available in DuckDB community extensions:
 INSTALL pfc FROM community;
 LOAD pfc;
 LOAD json;
