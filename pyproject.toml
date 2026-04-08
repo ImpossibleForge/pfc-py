@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pfc-jsonl"
-version = "0.1.3"
+version = "0.1.4"
 description = "Python interface for PFC-JSONL — high-performance log compression with block-level timestamp filtering"
 readme = "README.md"
 license = { text = "MIT" }
