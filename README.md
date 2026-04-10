@@ -177,4 +177,4 @@ WHERE line->>'$.level' = 'ERROR';
 
 MIT — see [LICENSE](https://github.com/ImpossibleForge/pfc-jsonl/blob/main/LICENSE)
 
-The **PFC-JSONL binary** is proprietary software — free for personal and open-source use. Commercial use requires a license: [impossibleforge@gmail.com](mailto:impossibleforge@gmail.com)
+The **PFC-JSONL binary** is proprietary software — free for personal and open-source use. Commercial use requires a license: [info@impossibleforge.com](mailto:info@impossibleforge.com)
