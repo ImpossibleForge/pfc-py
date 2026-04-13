@@ -53,7 +53,12 @@ curl -L https://github.com/ImpossibleForge/pfc-jsonl/releases/latest/download/pf
      -o pfc_jsonl && chmod +x pfc_jsonl && sudo mv pfc_jsonl /usr/local/bin/
 ```
 
-**macOS:** Coming soon.
+**macOS (Apple Silicon M1/M2/M3/M4):**
+```bash
+curl -L https://github.com/ImpossibleForge/pfc-jsonl/releases/latest/download/pfc_jsonl-macos-arm64 \
+     -o pfc_jsonl && chmod +x pfc_jsonl && sudo mv pfc_jsonl /usr/local/bin/
+```
+macOS Intel (x64): coming soon.
 
 **Windows:** No native binary available. Use WSL2 or a Linux machine.
 
