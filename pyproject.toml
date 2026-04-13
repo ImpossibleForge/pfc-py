@@ -4,12 +4,12 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pfc-jsonl"
-version = "0.1.4"
+version = "0.1.5"
 description = "Python interface for PFC-JSONL — high-performance log compression with block-level timestamp filtering"
 readme = "README.md"
 license = { text = "MIT" }
 authors = [
-    { name = "ImpossibleForge", email = "impossibleforge@gmail.com" }
+    { name = "ImpossibleForge", email = "info@impossibleforge.com" }
 ]
 keywords = [
     "compression", "jsonl", "logs", "log-compression",
@@ -22,7 +22,6 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: POSIX :: Linux",
     "Operating System :: MacOS",
-    "Operating System :: Microsoft :: Windows",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
