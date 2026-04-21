@@ -20,7 +20,7 @@ from typing import Optional
 
 from ._core import PFCError, _find_binary, run
 
-__version__ = "0.1.3"
+__version__ = "0.1.5"
 __all__ = [
     "compress",
     "decompress",
