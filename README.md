@@ -196,6 +196,6 @@ WHERE line->>'$.level' = 'ERROR';
 
 ## License
 
-pfc-py (this repository) is released under the MIT License — see [LICENSE](LICENSE).
+PFC-JSONL is free for personal and open-source use.
 
-The PFC-JSONL binary (`pfc_jsonl`) is proprietary software — free for personal and open-source use. Commercial use requires a license: [info@impossibleforge.com](mailto:info@impossibleforge.com)
+Commercial use (production pipelines, paid services, or business operations) requires a license. Contact: info@impossibleforge.com
