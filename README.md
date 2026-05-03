@@ -1,5 +1,9 @@
 # pfc-jsonl · Python Package
 
+[![PyPI](https://img.shields.io/pypi/v/pfc-jsonl.svg)](https://pypi.org/project/pfc-jsonl/)
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
+[![PFC-JSONL](https://img.shields.io/badge/PFC--JSONL-v3.4-green.svg)](https://github.com/ImpossibleForge/pfc-jsonl)
+
 Python interface for **PFC-JSONL** — high-performance compression for structured log files (JSONL), with block-level timestamp filtering.
 
 ```
